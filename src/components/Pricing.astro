@@ -1,0 +1,399 @@
+---
+const plans = [
+  {
+    name: "Landing Page",
+    desc: "Diseño ideal para comenzar tu presencia online.",
+    color: "#0b7fcf",
+    highlight: false,
+    delivery: "48 horas",
+    base: {
+      price: 160000,
+      cuotas: 53333,
+      transferencia: 128000,
+      mpLink: "https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=TU_PREFERENCE_ID_LANDING_BASE",
+    },
+    full: {
+      price: 200000,
+      cuotas: 66667,
+      transferencia: 160000,
+      mpLink: "https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=TU_PREFERENCE_ID_LANDING_FULL",
+    },
+    featuresBase: [
+      "Diseño de 1 página a medida",
+      "Formulario de contacto",
+      "Botón de WhatsApp flotante",
+      "Adaptada a celular",
+      "Deploy en Netlify",
+      "1 ronda de revisiones",
+    ],
+    featuresFull: [
+      "Todo lo del plan base",
+      "Dominio .com.ar por 1 año",
+      "Hosting por 1 año",
+      "1 cuenta de correo profesional",
+      "Certificado SSL incluido",
+      "Configuración completa",
+    ],
+    notBase: ["Dominio propio", "Hosting", "Correo profesional"],
+  },
+  {
+    name: "Web Empresa",
+    desc: "Sitio perfecto para mostrar tus servicios o productos.",
+    color: "#7c3aed",
+    highlight: true,
+    delivery: "5–7 días",
+    base: {
+      price: 420000,
+      cuotas: 140000,
+      transferencia: 336000,
+      mpLink: "https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=TU_PREFERENCE_ID_EMPRESA_BASE",
+    },
+    full: {
+      price: 480000,
+      cuotas: 160000,
+      transferencia: 384000,
+      mpLink: "https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=TU_PREFERENCE_ID_EMPRESA_FULL",
+    },
+    featuresBase: [
+      "Diseño de hasta 5 páginas",
+      "SEO básico configurado",
+      "Google Maps integrado",
+      "Galería de fotos",
+      "Formulario + WhatsApp",
+      "3 rondas de revisiones",
+    ],
+    featuresFull: [
+      "Todo lo del plan base",
+      "Dominio .com.ar por 1 año",
+      "Hosting por 1 año",
+      "3 cuentas de correo profesional",
+      "Certificado SSL incluido",
+      "Blog integrado",
+    ],
+    notBase: ["Dominio propio", "Hosting", "Correo profesional", "Blog"],
+  },
+  {
+    name: "Tienda Online",
+    desc: "Vendé productos con carrito de compras e integración de pagos.",
+    color: "#059669",
+    highlight: false,
+    delivery: "7–10 días",
+    base: {
+      price: 700000,
+      cuotas: 233334,
+      transferencia: 560000,
+      mpLink: "https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=TU_PREFERENCE_ID_TIENDA_BASE",
+    },
+    full: {
+      price: 780000,
+      cuotas: 260000,
+      transferencia: 624000,
+      mpLink: "https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=TU_PREFERENCE_ID_TIENDA_FULL",
+    },
+    featuresBase: [
+      "Catálogo de productos ilimitado",
+      "Carrito de compras",
+      "Mercado Pago integrado",
+      "Panel de administración",
+      "Gestión de stock",
+      "Capacitación incluida",
+    ],
+    featuresFull: [
+      "Todo lo del plan base",
+      "Dominio .com.ar por 1 año",
+      "Hosting por 1 año",
+      "3 cuentas de correo profesional",
+      "Certificado SSL incluido",
+      "Soporte prioritario 30 días",
+    ],
+    notBase: ["Dominio propio", "Hosting", "Correo profesional"],
+  },
+];
+
+function fmt(n: number): string {
+  return n.toLocaleString("es-AR");
+}
+---
+
+<section class="pricing" id="precios">
+  <div class="pricing-inner">
+
+    <div class="section-header">
+      <div class="section-label">Precios</div>
+      <h2 class="section-title">Planes <em>transparentes</em>,<br/>sin sorpresas</h2>
+      <p class="section-desc">Diseño 100% personalizado, entrega rápida y soporte post-lanzamiento.<br/>Pagá con Mercado Pago, en cuotas o con transferencia.</p>
+    </div>
+
+    <!-- TOGGLE -->
+    <div class="toggle-wrap">
+      <button class="toggle-btn active" id="btn-base" onclick="switchPlan('base')">
+        Solo diseño
+      </button>
+      <button class="toggle-btn" id="btn-full" onclick="switchPlan('full')">
+        + Hosting &amp; Dominio 1 año
+        <span class="toggle-badge">Recomendado</span>
+      </button>
+    </div>
+
+    <div class="plans-grid">
+      {plans.map((plan) => (
+        <div class={`plan-card ${plan.highlight ? 'highlighted' : ''}`}>
+          {plan.highlight && <div class="highlight-badge">Más elegido</div>}
+
+          <div class="plan-top">
+            <h3 class="plan-name" style={`color:${plan.color}`}>{plan.name}</h3>
+            <p class="plan-desc">{plan.desc}</p>
+          </div>
+
+          <!-- PRECIO BASE -->
+          <div class="price-block" data-plan="base">
+            <div class="plan-price">
+              <span class="price-sym">$</span>
+              <span class="price-amount">{fmt(plan.base.price)}</span>
+              <span class="price-cur">ARS</span>
+            </div>
+            <div class="price-cuotas">
+              3 x <strong>${fmt(plan.base.cuotas)}</strong> sin interés con tarjeta
+            </div>
+            <div class="price-transfer">
+              <span class="transfer-amt">${fmt(plan.base.transferencia)}</span> con transferencia bancaria
+            </div>
+            <a href={plan.base.mpLink} target="_blank" class="mp-btn" style={`background:${plan.color}`}>
+              <svg width="18" height="18" viewBox="0 0 32 32" fill="none">
+                <circle cx="16" cy="16" r="16" fill="rgba(255,255,255,0.2)"/>
+                <path d="M8 13c0-3.3 3.6-6 8-6s8 2.7 8 6c0 2-1.2 3.7-3 4.8V21h-2v-2.5c-.6.1-1.3.2-2 .2s-1.4-.1-2-.2V21h-2v-3.2C9.2 16.7 8 15 8 13z" fill="white"/>
+              </svg>
+              SOLICITALO AHORA
+            </a>
+          </div>
+
+          <!-- PRECIO FULL -->
+          <div class="price-block hidden" data-plan="full">
+            <div class="plan-price">
+              <span class="price-sym">$</span>
+              <span class="price-amount">{fmt(plan.full.price)}</span>
+              <span class="price-cur">ARS</span>
+            </div>
+            <div class="price-cuotas">
+              3 x <strong>${fmt(plan.full.cuotas)}</strong> sin interés con tarjeta
+            </div>
+            <div class="price-transfer">
+              <span class="transfer-amt">${fmt(plan.full.transferencia)}</span> con transferencia bancaria
+            </div>
+            <a href={plan.full.mpLink} target="_blank" class="mp-btn" style={`background:${plan.color}`}>
+              <svg width="18" height="18" viewBox="0 0 32 32" fill="none">
+                <circle cx="16" cy="16" r="16" fill="rgba(255,255,255,0.2)"/>
+                <path d="M8 13c0-3.3 3.6-6 8-6s8 2.7 8 6c0 2-1.2 3.7-3 4.8V21h-2v-3.2C9.2 16.7 8 15 8 13z" fill="white"/>
+              </svg>
+              SOLICITALO AHORA
+            </a>
+          </div>
+
+          <a href="https://wa.me/5491112345678" target="_blank" class="wa-btn">
+            💬 Más información
+          </a>
+
+          <!-- FEATURES -->
+          <div class="plan-features">
+            <div class="features-label">Incluye:</div>
+            <ul class="feat-list" data-plan="base">
+              {plan.featuresBase.map(f => (
+                <li class="feature-yes">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={plan.color} stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                  {f}
+                </li>
+              ))}
+              {plan.notBase.map(f => (
+                <li class="feature-no">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                  <s>{f}</s>
+                </li>
+              ))}
+            </ul>
+            <ul class="feat-list hidden" data-plan="full">
+              {plan.featuresFull.map(f => (
+                <li class="feature-yes">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={plan.color} stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="plan-delivery">⏱ Entrega: <strong>{plan.delivery}</strong></div>
+        </div>
+      ))}
+    </div>
+
+    <div class="pricing-note">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <span>
+        El descuento por transferencia es del <strong>20% off</strong>. Los precios se actualizan periódicamente.
+        ¿Necesitás algo diferente? <a href="https://wa.me/5491112345678" target="_blank">Escribinos por WhatsApp</a> y armamos un plan a medida.
+      </span>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.pricing { padding: 100px 32px; background: var(--off); }
+.pricing-inner { max-width: 1200px; margin: 0 auto; }
+
+.section-header { text-align: center; margin-bottom: 48px; }
+.section-label {
+  display: inline-block;
+  background: rgba(11,127,207,0.1); color: var(--blue);
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 6px 16px; border-radius: 100px; margin-bottom: 20px;
+}
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 600; color: var(--navy);
+  line-height: 1.2; margin-bottom: 16px;
+}
+.section-title em {
+  font-style: italic;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.section-desc { font-size: 1rem; color: var(--muted); line-height: 1.7; }
+
+/* TOGGLE */
+.toggle-wrap {
+  display: flex; justify-content: center; gap: 6px;
+  background: white; border: 1px solid var(--border);
+  border-radius: 14px; padding: 6px;
+  width: fit-content; margin: 0 auto 48px;
+}
+.toggle-btn {
+  position: relative; display: flex; align-items: center; gap: 8px;
+  padding: 11px 22px; border-radius: 10px; border: none; background: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.88rem; font-weight: 600; color: var(--muted);
+  cursor: pointer; transition: background 0.2s, color 0.2s;
+}
+.toggle-btn.active { background: var(--navy); color: white; }
+.toggle-badge {
+  background: #22c55e; color: white;
+  font-size: 0.6rem; font-weight: 800;
+  padding: 2px 8px; border-radius: 100px;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+
+/* GRID */
+.plans-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; align-items: start;
+}
+
+/* CARD */
+.plan-card {
+  background: white; border: 1px solid var(--border);
+  border-radius: 24px; padding: 32px 28px;
+  position: relative; transition: transform 0.2s, box-shadow 0.2s;
+}
+.plan-card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(13,27,62,0.1); }
+.plan-card.highlighted {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 1px #7c3aed, 0 24px 56px rgba(124,58,237,0.12);
+}
+.highlight-badge {
+  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+  background: #22c55e; color: white;
+  font-size: 0.68rem; font-weight: 800;
+  padding: 4px 18px; border-radius: 100px;
+  letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+}
+
+.plan-top { margin-bottom: 20px; }
+.plan-name { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; }
+.plan-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+
+/* PRECIO */
+.price-block.hidden { display: none; }
+.plan-price { display: flex; align-items: baseline; gap: 2px; margin-bottom: 7px; }
+.price-sym { font-size: 1.3rem; font-weight: 800; color: var(--navy); }
+.price-amount { font-size: 2.4rem; font-weight: 800; color: var(--navy); line-height: 1; }
+.price-cur { font-size: 0.82rem; font-weight: 700; color: var(--muted); margin-left: 4px; align-self: flex-end; margin-bottom: 3px; }
+.price-cuotas { font-size: 0.8rem; color: var(--muted); margin-bottom: 4px; }
+.price-cuotas strong { color: var(--blue); }
+.price-transfer { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; }
+.transfer-amt { color: var(--blue); font-weight: 700; }
+
+/* BOTONES */
+.mp-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  color: white; padding: 13px 20px; border-radius: 10px;
+  font-weight: 800; font-size: 0.8rem; letter-spacing: 0.07em;
+  margin-bottom: 10px; transition: opacity 0.2s, transform 0.2s;
+}
+.mp-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.wa-btn {
+  display: flex; align-items: center; justify-content: center;
+  border: 1.5px solid var(--border); color: var(--blue);
+  padding: 10px 20px; border-radius: 10px;
+  font-weight: 600; font-size: 0.82rem; margin-bottom: 24px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.wa-btn:hover { border-color: var(--blue); background: var(--off); }
+
+/* FEATURES */
+.plan-features { border-top: 1px solid var(--border); padding-top: 20px; }
+.features-label {
+  font-size: 0.68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--muted); margin-bottom: 12px;
+}
+.feat-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.feat-list.hidden { display: none; }
+.feat-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 0.82rem; }
+.feature-yes { color: var(--text); }
+.feature-no { color: #bbb; }
+
+.plan-delivery {
+  margin-top: 16px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem; color: var(--muted);
+}
+.plan-delivery strong { color: var(--navy); }
+
+/* NOTA */
+.pricing-note {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: white; border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 20px;
+  font-size: 0.82rem; color: var(--muted);
+  line-height: 1.7; margin-top: 32px;
+}
+.pricing-note svg { flex-shrink: 0; color: var(--blue); margin-top: 2px; }
+.pricing-note a { color: var(--blue); font-weight: 600; }
+.pricing-note strong { color: var(--text); }
+
+@media (max-width: 960px) {
+  .plans-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
+  .toggle-wrap { flex-direction: column; width: calc(100% - 40px); }
+}
+@media (max-width: 480px) {
+  .pricing { padding: 70px 20px; }
+  .toggle-btn { padding: 11px 16px; font-size: 0.82rem; }
+}
+</style>
+
+<script>
+  function switchPlan(plan: string) {
+    document.querySelectorAll<HTMLElement>('.price-block').forEach(el => {
+      el.classList.toggle('hidden', el.dataset.plan !== plan);
+    });
+    document.querySelectorAll<HTMLElement>('.feat-list').forEach(el => {
+      el.classList.toggle('hidden', el.dataset.plan !== plan);
+    });
+    document.getElementById('btn-base')?.classList.toggle('active', plan === 'base');
+    document.getElementById('btn-full')?.classList.toggle('active', plan === 'full');
+  }
+  (window as any).switchPlan = switchPlan;
+</script>

@@ -1,0 +1,104 @@
+---
+const works = [
+  {
+    name: "Noir Barber",
+    category: "Barbería · Landing Page",
+    desc: "Diseño oscuro y minimalista con cursor animado y animaciones de scroll.",
+    tags: ["HTML", "CSS", "JS"],
+    color: "#b89b6a",
+    bg: "#0a0a0a",
+    emoji: "✂️",
+  },
+  {
+    name: "Raíz Restó",
+    category: "Restaurante · Landing Page",
+    desc: "Estilo cálido y natural con menú de temporada y sección de reservas.",
+    tags: ["HTML", "CSS", "JS"],
+    color: "#c4673a",
+    bg: "#f7f0e6",
+    emoji: "🍽️",
+  },
+  {
+    name: "Tu negocio",
+    category: "Tu rubro · Tu estilo",
+    desc: "Así podría verse tu próximo sitio web. ¡Hablemos y lo hacemos realidad!",
+    tags: ["A medida"],
+    color: "#0b7fcf",
+    bg: "#eef4ff",
+    emoji: "🚀",
+    cta: true,
+  },
+];
+---
+<section class="portfolio" id="portfolio">
+  <div class="portfolio-inner">
+    <div class="section-header">
+      <div class="section-label">Portfolio</div>
+      <h2 class="section-title">Trabajos <em>recientes</em></h2>
+      <p class="section-desc">Cada proyecto es único. Diseñamos a medida de cada negocio y su identidad.</p>
+    </div>
+    <div class="portfolio-grid">
+      {works.map((w) => (
+        <div class={`work-card ${w.cta ? 'work-cta-card' : ''}`}>
+          <div class="work-preview" style={`background:${w.bg}`}>
+            <div class="work-emoji" style={`color:${w.color}`}>{w.emoji}</div>
+            <div class="work-lines">
+              <div class="wl" style={`background:${w.color}40; width:60%`}></div>
+              <div class="wl" style={`background:${w.color}28; width:40%`}></div>
+              <div class="wl wl-btn" style={`background:${w.color}`}></div>
+            </div>
+          </div>
+          <div class="work-info">
+            <div class="work-category">{w.category}</div>
+            <h3 class="work-name">{w.name}</h3>
+            <p class="work-desc">{w.desc}</p>
+            <div class="work-tags">
+              {w.tags.map(t => <span class="tag">{t}</span>)}
+            </div>
+            {w.cta
+              ? <a href="https://wa.me/5491112345678?text=Hola!%20Quiero%20una%20web%20para%20mi%20negocio" target="_blank" class="work-link cta-link">Quiero la mía →</a>
+              : <span class="work-link">Ver demo →</span>
+            }
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.portfolio { padding: 100px 32px; background: white; }
+.portfolio-inner { max-width: 1200px; margin: 0 auto; }
+.section-header { text-align: center; margin-bottom: 64px; }
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 28px;
+}
+.work-card {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.work-card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(13,27,62,0.1); }
+.work-cta-card { border: 2px dashed var(--blue); }
+.work-preview {
+  height: 180px; padding: 28px 24px;
+  display: flex; gap: 20px; align-items: center;
+}
+.work-emoji { font-size: 2.8rem; flex-shrink: 0; }
+.work-lines { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.wl { height: 10px; border-radius: 5px; }
+.wl-btn { width: 80px !important; height: 22px; border-radius: 6px; margin-top: 4px; }
+.work-info { padding: 24px; }
+.work-category { font-size: 0.72rem; font-weight: 600; color: var(--blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.work-name { font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.work-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+.work-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.tag { background: var(--off); color: var(--muted); font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 6px; }
+.work-link { font-size: 0.85rem; font-weight: 700; color: var(--blue); cursor: pointer; }
+.cta-link { display: inline-block; }
+@media (max-width: 900px) { .portfolio-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 580px) { .portfolio-grid { grid-template-columns: 1fr; } .portfolio { padding: 70px 20px; } }
+</style>

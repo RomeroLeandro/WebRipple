@@ -1,0 +1,204 @@
+---
+const services = [
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`,
+    title: "Landing Page",
+    desc: "Una página diseñada para convertir visitas en clientes. Perfecta para promocionar un servicio, producto o campaña.",
+    features: ["Diseño 100% personalizado", "Formulario de contacto", "Botón de WhatsApp", "Adaptada a celular"],
+    price: "desde $80 USD",
+    delivery: "48 horas",
+    color: "#0b7fcf",
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>`,
+    title: "Web Institucional",
+    desc: "Sitio completo para tu empresa o negocio. Múltiples páginas, galería, servicios y toda la info que necesitás.",
+    features: ["Hasta 5 páginas", "Galería de fotos", "SEO básico incluido", "Google Maps integrado"],
+    price: "desde $250 USD",
+    delivery: "5 días hábiles",
+    color: "#7c3aed",
+    featured: true,
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.95-1.57l1.65-7.43H6"/></svg>`,
+    title: "Tienda Online",
+    desc: "Vendé tus productos online con carrito de compras, pagos con Mercado Pago y gestión de stock.",
+    features: ["Catálogo de productos", "Mercado Pago integrado", "Panel de administración", "Notificaciones de venta"],
+    price: "desde $450 USD",
+    delivery: "7-10 días hábiles",
+    color: "#059669",
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,
+    title: "SEO Local",
+    desc: "Aparecé en Google cuando alguien busca tu rubro en tu zona. Más visibilidad, más clientes.",
+    features: ["Google My Business", "Palabras clave locales", "Reporte mensual", "Optimización continua"],
+    price: "desde $40 USD/mes",
+    delivery: "Resultados en 30-60 días",
+    color: "#d97706",
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+    title: "Mantenimiento",
+    desc: "Nos encargamos de que tu sitio siempre esté actualizado, seguro y funcionando perfectamente.",
+    features: ["Actualizaciones mensuales", "Soporte prioritario", "Backups automáticos", "Cambios de contenido"],
+    price: "desde $25 USD/mes",
+    delivery: "Respuesta en 24hs",
+    color: "#0b7fcf",
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>`,
+    title: "Diseño Mobile-First",
+    desc: "Todos nuestros sitios están optimizados para celular desde el primer día. Tus clientes navegan desde el teléfono.",
+    features: ["100% responsive", "Velocidad optimizada", "Touch-friendly", "Core Web Vitals"],
+    price: "Incluido en todos",
+    delivery: "Siempre",
+    color: "#29c6e0",
+  },
+];
+---
+
+<section class="services" id="servicios">
+  <div class="services-inner">
+    <div class="section-header">
+      <div class="section-label">Servicios</div>
+      <h2 class="section-title">Todo lo que tu negocio necesita<br/><em>para crecer online</em></h2>
+      <p class="section-desc">Desde una landing rápida hasta una tienda completa. Siempre con diseño profesional y entrega puntual.</p>
+    </div>
+    <div class="services-grid">
+      {services.map((s) => (
+        <div class={`service-card ${s.featured ? 'featured' : ''}`}>
+          {s.featured && <div class="featured-badge">Más popular</div>}
+          <div class="service-icon" style={`color:${s.color}; background:${s.color}18`}>
+            <Fragment set:html={s.icon} />
+          </div>
+          <h3 class="service-title">{s.title}</h3>
+          <p class="service-desc">{s.desc}</p>
+          <ul class="service-features">
+            {s.features.map(f => (
+              <li>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+          <div class="service-footer">
+            <div>
+              <div class="service-price">{s.price}</div>
+              <div class="service-delivery">⏱ {s.delivery}</div>
+            </div>
+            <a href="#contacto" class="service-cta" style={`background:${s.color}18; color:${s.color}`}>
+              Consultar
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.services {
+  padding: 100px 32px;
+  background: var(--off);
+}
+.services-inner { max-width: 1200px; margin: 0 auto; }
+.section-header { text-align: center; margin-bottom: 64px; }
+.section-label {
+  display: inline-block;
+  background: rgba(11,127,207,0.1);
+  color: var(--blue);
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 6px 16px; border-radius: 100px;
+  margin-bottom: 20px;
+}
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.2; margin-bottom: 16px;
+}
+.section-title em {
+  font-style: italic;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.section-desc { font-size: 1rem; color: var(--muted); max-width: 520px; margin: 0 auto; line-height: 1.7; }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.service-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(13,27,62,0.1);
+}
+.service-card.featured {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 1px var(--blue), 0 20px 48px rgba(11,127,207,0.15);
+}
+.featured-badge {
+  position: absolute;
+  top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--grad);
+  color: white;
+  font-size: 0.72rem; font-weight: 700;
+  padding: 4px 16px; border-radius: 100px;
+  white-space: nowrap;
+}
+.service-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+}
+.service-title {
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 10px;
+}
+.service-desc {
+  font-size: 0.875rem; color: var(--muted);
+  line-height: 1.7; margin-bottom: 20px;
+}
+.service-features {
+  list-style: none; margin-bottom: 24px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.service-features li {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.82rem; color: var(--text);
+}
+.service-features svg { color: #22c55e; flex-shrink: 0; }
+.service-footer {
+  display: flex; align-items: flex-end;
+  justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.service-price {
+  font-size: 1rem; font-weight: 700; color: var(--navy);
+}
+.service-delivery { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+.service-cta {
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 0.82rem; font-weight: 700;
+  transition: opacity 0.2s;
+}
+.service-cta:hover { opacity: 0.8; }
+
+@media (max-width: 900px) { .services-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 580px) { .services-grid { grid-template-columns: 1fr; } .services { padding: 70px 20px; } }
+</style>
